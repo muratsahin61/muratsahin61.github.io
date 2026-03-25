@@ -89,19 +89,28 @@ img {
 .geometric-pattern {
     position: absolute;
     inset: 0;
-    opacity: 0.06;
+    opacity: 0.08;
     background-image:
-        /* Large octagonal star pattern */
+        /* Selçuklu yıldız deseni */
         repeating-conic-gradient(
             from 0deg at 50% 50%,
-            transparent 0deg 40deg,
-            rgba(201, 168, 76, 0.3) 40deg 50deg,
-            transparent 50deg 90deg
+            transparent 0deg 30deg,
+            rgba(201, 168, 76, 0.25) 30deg 36deg,
+            transparent 36deg 60deg
         ),
-        /* Grid overlay */
-        linear-gradient(rgba(201, 168, 76, 0.1) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(201, 168, 76, 0.1) 1px, transparent 1px);
-    background-size: 120px 120px, 60px 60px, 60px 60px;
+        repeating-conic-gradient(
+            from 15deg at 50% 50%,
+            transparent 0deg 30deg,
+            rgba(26, 107, 138, 0.15) 30deg 36deg,
+            transparent 36deg 60deg
+        ),
+        /* İznik çini grid */
+        linear-gradient(rgba(201, 168, 76, 0.12) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201, 168, 76, 0.12) 1px, transparent 1px),
+        /* Diyagonal çizgiler */
+        repeating-linear-gradient(45deg, transparent, transparent 28px, rgba(201, 168, 76, 0.05) 28px, rgba(201, 168, 76, 0.05) 29px),
+        repeating-linear-gradient(-45deg, transparent, transparent 28px, rgba(201, 168, 76, 0.05) 28px, rgba(201, 168, 76, 0.05) 29px);
+    background-size: 100px 100px, 100px 100px, 50px 50px, 50px 50px, 40px 40px, 40px 40px;
     animation: patternDrift 60s linear infinite;
     pointer-events: none;
 }
@@ -185,15 +194,27 @@ img {
 }
 
 .logo-icon {
-    font-size: 0.8rem;
-    animation: logoRotate 8s ease-in-out infinite;
+    width: 22px;
+    height: 22px;
+    color: var(--gold);
+    flex-shrink: 0;
 }
 
-@keyframes logoRotate {
-    0%, 100% { transform: rotate(0deg); }
-    25% { transform: rotate(45deg); }
-    50% { transform: rotate(0deg); }
-    75% { transform: rotate(-45deg); }
+/* === Turkish Corner Motifs === */
+.turkish-corner {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    z-index: 1;
+    pointer-events: none;
+}
+.turkish-corner.corner-tl { top: 0; left: 0; }
+.turkish-corner.corner-tr { top: 0; right: 0; }
+.turkish-corner.corner-bl { bottom: 0; left: 0; }
+.turkish-corner.corner-br { bottom: 0; right: 0; }
+
+@media (max-width: 768px) {
+    .turkish-corner { width: 120px; height: 120px; }
 }
 
 .nav-menu {
@@ -545,23 +566,23 @@ img {
     margin: 0 auto;
 }
 
-.photo-placeholder {
+.profile-img {
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, var(--teal), var(--gold-dark));
+    object-fit: cover;
+    object-position: center top;
     border-radius: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
+    filter: brightness(0.95) contrast(1.05);
+    transition: all var(--transition-normal);
 }
 
-.initials {
-    font-family: var(--font-heading);
-    font-size: 4rem;
-    font-weight: 700;
-    color: rgba(255, 255, 255, 0.9);
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+.photo-frame:hover .profile-img {
+    filter: brightness(1) contrast(1.05);
+    transform: scale(1.03);
+}
+
+.photo-frame {
+    overflow: hidden;
 }
 
 .frame-corner {
@@ -1071,6 +1092,15 @@ img {
     text-align: center;
     position: relative;
     z-index: 1;
+}
+
+.footer-hilal {
+    margin-bottom: 16px;
+    opacity: 0.7;
+}
+
+.tulip-ornament {
+    display: inline-block;
 }
 
 .footer-bismillah {
